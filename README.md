@@ -40,16 +40,17 @@ Texting "will you be my valentine?" is fine, but sometimes you want to make a bi
 
 ## :link: How to Use
  
-1. **Get Your Telegram ID**  
-   Open Telegram and message **[@Getmyid_bot](https://t.me/Getmyid_bot)**. It will instantly reply with your `ID`. Copy that number.
- 
-2. **Generate Your Link**  
-   Visit the app (e.g., `https://little-blush.vercel.app/`). Paste your ID into the box and click "Generate Link".
- 
-3. **Share the Love**  
-   Send the unique link it gives you to your special someone. When they open it, everything works like magic! ✨
- 
-> **Important:** Make sure you've started a chat with **[@mochidispachbot](https://t.me/mochidispachbot)** so it can message you!
+1. **Connect Your Telegram**  
+   Visit the app and click "Connect Telegram". You'll be redirected to start the bot.
+
+2. **Press Start**  
+   In Telegram, press **Start** on [@mochidispachbot](https://t.me/mochidispachbot). That's it!
+
+3. **Get Your Link**  
+   Go back to the website - your unique proposal link is ready! ✨
+
+4. **Share the Love**  
+   Send the link to your special someone. When they say yes, you'll get a Telegram notification! 💕
 
 ## :camera: Preview
 
@@ -63,43 +64,35 @@ Texting "will you be my valentine?" is fine, but sometimes you want to make a bi
 
 ### Prerequisites
 
-To get this running for yourself, you just need a few things:
-
 1. **A Telegram Bot**
    - Message [@BotFather](https://t.me/BotFather) on Telegram.
    - Send `/newbot` and give it a name.
    - Copy the **API Token** it gives you.
-   
-2. **Bot Setup**
-   - You need to start a chat with the bot that will handle the notifications.
-   - Message **[@mochidispachbot](https://t.me/mochidispachbot)** (or your own bot) and click **Start**.
-   - *Note: If you skip this, the bot won't have permission to message you.*
 
-3. **Your Chat ID**
-   - Message [@Getmyid_bot](https://t.me/Getmyid_bot) to find your personal Telegram Chat ID.
+2. **Upstash Redis Database**
+   - Create a free account at [upstash.com](https://upstash.com)
+   - Or add the Upstash integration from Vercel Marketplace
 
 <br />
 
 ### Option 1: Deploy on Vercel (Recommended)
 
-The quickest way to get your link live:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/NethminaGunasekara/little-blush&env=TELEGRAM_BOT_TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/NethminaGunasekara/little-blush&env=TELEGRAM_BOT_TOKEN,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 1. Click the deploy button above.
 2. Connect your GitHub account.
-3. When asked for Environment Variables, add:
+3. Add Environment Variables:
    | Variable | Value |
    |----------|-------|
-   | `TELEGRAM_BOT_TOKEN` | The token you got from BotFather |
+   | `TELEGRAM_BOT_TOKEN` | Token from BotFather |
+   | `UPSTASH_REDIS_REST_URL` | Your Upstash Redis URL |
+   | `UPSTASH_REDIS_REST_TOKEN` | Your Upstash Redis Token |
 4. Click **Deploy**.
-5. Your site is now live!
+5. The Telegram webhook is **automatically configured** during production builds! 🎉
 
 <br />
 
 ### Option 2: Run Locally
-
-If you prefer to run it on your own machine:
 
 ```bash
 # Clone the repository
@@ -113,9 +106,11 @@ npm install
 cp .env.template .env.local
 ```
 
-Open `.env.local` and add your token:
+Open `.env.local` and add your credentials:
 ```env
 TELEGRAM_BOT_TOKEN=your_bot_token_here
+UPSTASH_REDIS_REST_URL=your_upstash_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_token
 ```
 
 Start the server:
@@ -123,7 +118,7 @@ Start the server:
 npm run dev
 ```
 
-The app will be running at `http://localhost:3000`.
+> **Note:** For local development, you'll need to use a tool like [ngrok](https://ngrok.com/) to expose your localhost and set up the webhook.
 
 <br />
 
@@ -132,12 +127,10 @@ The app will be running at `http://localhost:3000`.
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `TELEGRAM_BOT_TOKEN` | ✅ Yes | Your bot token from BotFather |
-
-> **Note:** Your Chat ID isn't needed here. You'll enter it in the app itself to generate your personal link.
+| `UPSTASH_REDIS_REST_URL` | ✅ Yes | Upstash Redis REST URL |
+| `UPSTASH_REDIS_REST_TOKEN` | ✅ Yes | Upstash Redis REST Token |
 
 <br />
-
-
 
 ## :art: Tech Stack
 
@@ -145,6 +138,7 @@ The app will be running at `http://localhost:3000`.
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
 - **Icons:** [Lucide React](https://lucide.dev/)
+- **Database:** [Upstash Redis](https://upstash.com/)
 - **Deployment:** [Vercel](https://vercel.com/)
 
 <br />
