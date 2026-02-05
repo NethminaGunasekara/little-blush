@@ -77,7 +77,7 @@ Texting "will you be my valentine?" is fine, but sometimes you want to make a bi
 
 ### Option 1: Deploy on Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/NethminaGunasekara/little-blush&env=TELEGRAM_BOT_TOKEN,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/NethminaGunasekara/little-blush&env=TELEGRAM_BOT_TOKEN,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,PRODUCTION_URL)
 
 1. Click the deploy button above.
 2. Connect your GitHub account.
@@ -87,6 +87,7 @@ Texting "will you be my valentine?" is fine, but sometimes you want to make a bi
    | `TELEGRAM_BOT_TOKEN` | Token from BotFather |
    | `UPSTASH_REDIS_REST_URL` | Your Upstash Redis URL |
    | `UPSTASH_REDIS_REST_TOKEN` | Your Upstash Redis Token |
+   | `PRODUCTION_URL` | Your production domain (e.g. `little-blush.vercel.app`) |
 4. Click **Deploy**.
 5. The Telegram webhook is **automatically configured** during production builds! 🎉
 
@@ -118,7 +119,23 @@ Start the server:
 npm run dev
 ```
 
-> **Note:** For local development, you'll need to use a tool like [ngrok](https://ngrok.com/) to expose your localhost and set up the webhook.
+#### Setting up Webhook for Local Development
+
+To receive Telegram updates locally, you'll need to expose your localhost using [ngrok](https://ngrok.com/):
+
+1. Install ngrok and start a tunnel:
+   ```bash
+   ngrok http 3000
+   ```
+
+2. Copy the HTTPS URL (e.g., `https://abc123.ngrok-free.app`)
+
+3. Set the webhook to your ngrok URL:
+   ```
+   https://api.telegram.org/bot<YOUR_TOKEN>/setWebhook?url=https://YOUR-NGROK-URL/api/telegram/webhook
+   ```
+
+4. Open this URL in your browser - you should see `{"ok":true,"result":true}`
 
 <br />
 
@@ -129,6 +146,7 @@ npm run dev
 | `TELEGRAM_BOT_TOKEN` | ✅ Yes | Your bot token from BotFather |
 | `UPSTASH_REDIS_REST_URL` | ✅ Yes | Upstash Redis REST URL |
 | `UPSTASH_REDIS_REST_TOKEN` | ✅ Yes | Upstash Redis REST Token |
+| `PRODUCTION_URL` | ✅ Yes | Your production domain (without `https://`) |
 
 <br />
 
