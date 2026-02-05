@@ -26,8 +26,10 @@ export async function POST(request: NextRequest) {
           { ex: SESSION_TTL }
         );
 
-        // Send welcome message
+        // Send welcome message with the proposal link
         if (TELEGRAM_BOT_TOKEN) {
+          const proposalLink = `https://little-blush.vercel.app/?id=${chatId}`;
+          
           await fetch(
             `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
             {
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 chat_id: chatId,
-                text: `Hey ${firstName}! 💖\n\nYou're all set up! Go back to the website to get your special Valentine's proposal link. 🌹`,
+                text: `Hey ${firstName}! 💖\n\nYou're all set! Here's your special Valentine's proposal link:\n\n🔗 ${proposalLink}\n\nShare it with your special someone and wait for the magic to happen! 🌹✨`,
                 parse_mode: "HTML",
               }),
             }
