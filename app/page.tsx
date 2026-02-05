@@ -36,12 +36,12 @@ function ValentineContent() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const yesControls = useAnimation();
 
-  // If no ID is present, show the Generator
+  // no id? show em the link generator instead
   if (!targetChatId) {
     return <LinkGenerator />;
   }
 
-  // Helper to send telegram notifications
+  // fires off a telegram ping
   const sendTelegramNotification = async (type: "yes_click" | "message_sent", text?: string) => {
     try {
       await fetch("/api/telegram", {
@@ -54,7 +54,7 @@ function ValentineContent() {
     }
   };
 
-  // music player shenanigans
+  // gotta handle the music player stuff here
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying && hasStarted) {
@@ -70,7 +70,7 @@ function ValentineContent() {
   const handleStart = () => {
     setHasStarted(true);
     setIsPlaying(true);
-    // browsers block autoplay so we gotta do this on user click
+    // browsers are annoying about autoplay so this needs a real click
     if (audioRef.current) {
       audioRef.current.play().catch(() => {});
     }
@@ -82,14 +82,14 @@ function ValentineContent() {
 
   const handleYesClick = () => {
     setIsSuccess(true);
-    // let her know she made someone very happy
+    // time to deliver the good news
     sendTelegramNotification("yes_click");
   };
 
   const handleSendMessage = () => {
     if (!message.trim()) return;
     setIsSent(true);
-    // yeet the message to telegram
+    // send the message over to telegram
     sendTelegramNotification("message_sent", message.trim());
     setTimeout(() => {
       setMessage("");
@@ -97,9 +97,9 @@ function ValentineContent() {
     }, 2000);
   };
 
-  // the no button is scared of commitment
+  // the no button has commitment issues lol
   const handleNoHover = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
-      // Pulse the Yes button
+      // make yes button do a little pulse
       yesControls.start({
         scale: [1, 1.2, 1],
         transition: { duration: 0.4 },
@@ -120,17 +120,17 @@ function ValentineContent() {
         mouseY = e.touches[0].clientY;
       }
   
-      // Calculate vector from mouse to button center
+      // figure out which way to run away
       let deltaX = buttonCenterX - mouseX;
       let deltaY = buttonCenterY - mouseY;
   
-      // If mouse is right on center (rare), pick random direction
+      // edge case where mouse is dead center - just pick a random direction
       if (deltaX === 0 && deltaY === 0) {
         deltaX = Math.random() - 0.5;
         deltaY = Math.random() - 0.5;
       }
   
-      // Normalize and scale (push distance)
+      // math wizardry to figure out how far to yeet the button
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       const pushDistance = 250; 
       const scale = pushDistance / (distance || 1); 
@@ -138,7 +138,7 @@ function ValentineContent() {
       let newX = buttonRect.left + deltaX * scale;
       let newY = buttonRect.top + deltaY * scale;
   
-      // Boundary checks 
+      // dont let it escape off screen
       const padding = 20;
       const maxX = window.innerWidth - buttonRect.width - padding;
       const maxY = window.innerHeight - buttonRect.height - padding;

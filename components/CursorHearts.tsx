@@ -35,13 +35,13 @@ export default function CursorHearts() {
       document.body.appendChild(heart);
       heartsRef.current.push(heart);
 
-      // do the floaty thing
+      // float away lil guy
       requestAnimationFrame(() => {
         heart.style.transform = `translate(-50%, -150%) scale(0)`;
         heart.style.opacity = "0";
       });
 
-      // bye bye little heart
+      // aight time to remove it
       setTimeout(() => {
         if (heart.parentNode) {
           heart.parentNode.removeChild(heart);
@@ -56,12 +56,12 @@ export default function CursorHearts() {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
-      // tidy up any leftover hearts
+      // clean up any stragglers
       heartsRef.current.forEach((h) => {
         if (h.parentNode) h.parentNode.removeChild(h);
       });
     };
   }, []);
 
-  return null; // this component is invisible it just spawns hearts on the body
+  return null; // invisible component - just spawns hearts wherever you move
 }

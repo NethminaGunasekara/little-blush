@@ -26,7 +26,7 @@ export default function HeartsBackground({ transparent = false }: { transparent?
   const [hearts, setHearts] = useState<FloatingHeart[]>([]);
 
   useEffect(() => {
-    // spawn a bunch of floaty hearts
+    // throw a bunch of hearts into the mix
     const newHearts: FloatingHeart[] = Array.from({ length: 50 }).map((_, i) => {
       const duration = Math.random() * 20 + 10;
       return {
