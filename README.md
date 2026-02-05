@@ -24,7 +24,7 @@
   <span> · </span>
     <a href="#rocket-deploy-your-own">Deploy</a>
   <span> · </span>
-    <a href="https://little-blush.vercel.app/" target="_blank">Try It!</a>
+    <a href="https://little-blush.vercel.app/">Try It!</a>
   </h4>
 </div>
 

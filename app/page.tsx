@@ -153,10 +153,10 @@ function ValentineContent() {
 
 
   return (
-    <div className="relative min-h-screen overflow-hidden font-[family-name:var(--font-geist-sans)]">
+    <div className="relative min-h-screen overflow-hidden font-geist-sans">
       <button 
         onClick={toggleMusic}
-        className="fixed top-4 right-4 z-[60] rounded-full bg-white/80 p-3 text-pink-500 shadow-md backdrop-blur-sm transition hover:scale-110 hover:bg-white"
+        className="fixed top-4 right-4 z-60 rounded-full bg-white/80 p-3 text-pink-500 shadow-md backdrop-blur-sm transition hover:scale-110 hover:bg-white"
         aria-label="Toggle music"
       >
         {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
@@ -195,7 +195,7 @@ function ValentineContent() {
                 <p className="text-lg text-pink-400">I have a very important question for you...</p>
             </div>
             <motion.button 
-              className="rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-8 py-3 text-xl font-bold text-white shadow-lg transition-all hover:scale-105 hover:from-pink-500 hover:to-rose-500 hover:shadow-xl"
+              className="rounded-full bg-linear-to-r from-pink-400 to-rose-400 px-8 py-3 text-xl font-bold text-white shadow-lg transition-all hover:scale-105 hover:from-pink-500 hover:to-rose-500 hover:shadow-xl"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{
                 duration: 2,
